@@ -1,5 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 let weatherData;
 
@@ -8,6 +10,13 @@ try {
   console.log(weatherData);
 } catch (error) {
   console.error('Error reading the weather data:', error);
+}
+
+class Forecast {
+  constructor(date, description, high_temp, low_temp) {
+    this.date = date;
+    this.description = `Low of ${low_temp}, high of ${high_temp} with ${description}`;
+  }
 }
 
 app.get('/', (req, res) => {
@@ -22,7 +31,15 @@ app.get('/weather', (req, res) => {
   );
 
   if (foundCity && ['Seattle', 'Paris', 'Amman'].includes(foundCity.city_name)) {
-    res.json(foundCity);
+    const forecasts = foundCity.data.map(weatherDay => {
+      const date = weatherDay.valid_date;
+      const description = weatherDay.weather.description;
+      const highTemp = weatherDay.high_temp;
+      const lowTemp = weatherDay.low_temp;
+      return new Forecast(date, description, highTemp, lowTemp);
+    });
+
+    res.json(forecasts);
   } else {
     res.status(404).send('City not found or not supported');
   }

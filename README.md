@@ -42,15 +42,15 @@ ChatGPT
 ![Dataflow between application](img/dataflow.png)
 
 ## Time Estimates
-Name of feature: Map
+Name of feature: Weather
 
-Estimate of time needed to complete: 1 hour
+Estimate of time needed to complete: 2 hour
 
-Start time: 11:30pm 
+Start time: 7 December 2023
 
-Finish time: 1:30am
+Finish time: 8 December 2023
 
-Actual time needed to complete: 2 hours
+Actual time needed to complete: 5 hours in total for the days worked on
 
 ## Lighthouse
 
